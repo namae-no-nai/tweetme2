@@ -18,9 +18,10 @@ This is amazing !!!
         {% csrf_token %}
         <input type="hidden" value="/" name='next'>
         <textarea class="form-control" 
-                  name="content" 
-                  placeholder="Your tweet">
-        </textarea>
+                  required='required' 
+                  name='content' 
+                  placeholder="Your tweet..." 
+        ></textarea>
         <button type="submit" class="btn btn-primary">
           Tweet
         </button>
@@ -50,6 +51,9 @@ This is amazing !!!
       if (xhr.status === 201){
         const newTweetJson = xhr.response
         const newTweetElement = formatTweetElement(newTweetJson)
+        const ogHtml = tweetsContainerElement.innerHTML
+        tweetsContainerElement.innerHTML = newTweetElement + ogHtml
+        myForm.reset()
       }
     }
     xhr.send(myFormData)
